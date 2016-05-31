@@ -1,0 +1,51 @@
+
+@mixin base-margin {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+h1.title {
+  @include base-margin;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 8px;
+}
+
+h2 {
+  @include base-margin;
+  font-size: 1.6rem;
+}
+
+h2:first-child {
+  margin-top: 20px;
+}
+
+h3 {
+  @include base-margin;
+  margin-top: 40px;
+  font-size: 1.2rem;
+}
+h4 {
+  @include base-margin;
+  font-size: 1.0rem;
+}
+
+.polls-list > .list {
+
+  margin-bottom: 40px;
+}
+
+.poll-detail {
+
+  .vote-buttons {}  // TODO: remove me?
+
+  .poll-description {
+    @include base-margin;
+  }
+
+  .poll-diagram {
+    @include base-margin;
+    margin-bottom: 40px;
+  }
+
+}

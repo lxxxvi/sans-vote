@@ -22,3 +22,48 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.controller('PollsCtrl', function($scope) {
+  $scope.futurePolls = [
+    { id: 1, title: 'Poll 1' },
+    { id: 2, title: 'Poll 2' },
+    { id: 3, title: 'Poll 3' },
+    { id: 4, title: 'Poll 4' }
+  ];
+  $scope.pastPolls = [
+    { id: 5, title: 'Poll 5' },
+    { id: 6, title: 'Poll 6' },
+    { id: 7, title: 'Poll 7' },
+    { id: 8, title: 'Poll 8' }
+  ];
+})
+
+.controller('PollCtrl', function($scope, $stateParams) {
+  $scope.poll = {
+    id: $stateParams.pollId,
+    title: 'Poll',
+    description: 'Details zur Abstimmung'
+  };
+
+  $scope.vote = 'Yes'
+})
+
+.config(function($stateProvider, $urlRouterProvider,  $ionicConfigProvider) {
+  $stateProvider
+
+  .state('polls', {
+    url: '/polls',
+    templateUrl: 'templates/polls.html',
+    controller: 'PollsCtrl'
+  })
+
+  .state('poll', {
+    url: '/poll/:pollId',
+    templateUrl: 'templates/poll.html',
+    controller: 'PollCtrl'
+  })
+
+  $urlRouterProvider.otherwise('/polls');
+
+
+})
