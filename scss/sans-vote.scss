@@ -1,43 +1,40 @@
 
+$mainBlue: rgb(0, 113, 188);
+
 @mixin base-margin {
   margin-left: 16px;
   margin-right: 16px;
 }
 
-h1.title {
-  @include base-margin;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 8px;
-}
-
-h2 {
+h2, h2:first-child {
   @include base-margin;
   font-size: 1.6rem;
-}
-
-h2:first-child {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 h3 {
   @include base-margin;
   margin-top: 40px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 h4 {
   @include base-margin;
   font-size: 1.0rem;
 }
 
-.polls-list > .list {
-
-  margin-bottom: 40px;
+.blue-box {
+  padding: 40px 20px;
+  background-color: transparentize($mainBlue, 0.95);
 }
 
-.poll-detail {
+// add styles for polls.html here
+.polls-view {
 
-  .vote-buttons {}  // TODO: remove me?
+}
+
+// add styles for poll.html here
+.poll-view {
 
   .poll-description {
     @include base-margin;
@@ -45,6 +42,7 @@ h4 {
 
   .poll-diagram {
     @include base-margin;
+    margin-top: 20px;
     margin-bottom: 40px;
   }
 

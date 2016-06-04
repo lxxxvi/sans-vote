@@ -9815,40 +9815,34 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-h1.title {
+h2, h2:first-child {
   margin-left: 16px;
   margin-right: 16px;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 8px; }
-
-h2 {
-  margin-left: 16px;
-  margin-right: 16px;
-  font-size: 1.6rem; }
-
-h2:first-child {
-  margin-top: 20px; }
+  font-size: 1.6rem;
+  margin-top: 30px;
+  margin-bottom: 20px; }
 
 h3 {
   margin-left: 16px;
   margin-right: 16px;
   margin-top: 40px;
-  font-size: 1.2rem; }
+  font-size: 1.5rem; }
 
 h4 {
   margin-left: 16px;
   margin-right: 16px;
   font-size: 1.0rem; }
 
-.polls-list > .list {
-  margin-bottom: 40px; }
+.blue-box {
+  padding: 40px 20px;
+  background-color: rgba(0, 113, 188, 0.05); }
 
-.poll-detail .poll-description {
+.poll-view .poll-description {
   margin-left: 16px;
   margin-right: 16px; }
 
-.poll-detail .poll-diagram {
+.poll-view .poll-diagram {
   margin-left: 16px;
   margin-right: 16px;
+  margin-top: 20px;
   margin-bottom: 40px; }

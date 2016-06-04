@@ -24,6 +24,8 @@ angular.module('starter', ['ionic', 'chart.js'])
 })
 
 .controller('PollsCtrl', function($scope) {
+
+  // TODO: load pools
   $scope.futurePolls = [
     { id: 1, title: 'Poll 1' },
     { id: 2, title: 'Poll 2' },
@@ -39,16 +41,21 @@ angular.module('starter', ['ionic', 'chart.js'])
 })
 
 .controller('PollCtrl', function($scope, $stateParams) {
+
   $scope.poll = {
     id: $stateParams.pollId,
-    title: 'Poll',
-    description: 'Details zur Abstimmung'
+    title: 'Poll',        // TODO: load title of poll
+    description: 'Details zur Abstimmung'  // TODO: load text for poll
   };
 
-  $scope.labels = ['Ja', 'Nein'];
-  $scope.data = [58, 42];
+  $scope.pieChart = {
+    labels: ['Ja', 'Nein'],
+    data: [ 58, 42 ],     // TODO: set current results
+    colours: [ '#0071bc', '#add2eb' ]
+  }
 
-  $scope.vote = 'Yes';
+  $scope.vote = 'Yes';  // TODO: set 'Yes', 'No' or '' ('' means not voted yet)
+
 })
 
 .config(function($stateProvider, $urlRouterProvider,  $ionicConfigProvider) {
