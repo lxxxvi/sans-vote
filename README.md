@@ -3,6 +3,13 @@
 ## Dependencies
 
 ```shell
-npm install gulp
+npm install -g gulp
 ionic setup sass
+```
+
+## Platforms
+
+```shell
+ionic platform add android
+ionic platform add ios 
 ```
