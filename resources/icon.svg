@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1000px"
+	 height="1000px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+<g id="Layer_1">
+	<rect fill="#0071BC" width="1000" height="1000"/>
+</g>
+<g id="Layer_2">
+	<g>
+		<defs>
+			<rect id="SVGID_1_" x="100" y="439" width="800" height="463"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<g id="envelope" clip-path="url(#SVGID_2_)">
+			<g id="square">
+				<path fill="#FFFFFF" d="M860,492v370H140V492H860 M900,452H100v450h800V452L900,452z"/>
+			</g>
+			<polygon id="v" fill="#FFFFFF" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="30" stroke-miterlimit="10" points="
+				900,453.5 500,774.5 100,453.5 			"/>
+		</g>
+	</g>
+</g>
+<g id="Layer_3">
+	<g>
+		<rect x="700" y="102" fill="#D52B1E" width="200" height="200"/>
+		<rect x="737.5" y="183.25" fill="#FFFFFF" width="125" height="37.5"/>
+		<rect x="781.25" y="139.5" fill="#FFFFFF" width="37.5" height="125"/>
+	</g>
+</g>
+<g id="Layer_4">
+</g>
+</svg>
