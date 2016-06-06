@@ -3,14 +3,14 @@
   <ion-content>
     <h2>Anstehende Abstimmungen</h2>
     <ion-list class="polls-list">
-      <ion-item ng-repeat="poll in futurePolls" href="#/poll/{{poll.id}}">
-        <h3>{{ poll.title }}</h3>
+      <ion-item ng-repeat="poll in futurePolls" href="#/poll/{{poll.poll_id}}">
+        <h3>{{ poll.name }}</h3>
       </ion-item>
     </ion-list>
     <h2>Vergangene Abstimmungen</h2>
     <ion-list class="polls-list">
-      <ion-item ng-repeat="poll in pastPolls" href="#/poll/{{poll.id}}">
-        <h3>{{ poll.title }}</h3>
+      <ion-item ng-repeat="poll in pastPolls" href="#/poll/{{poll.poll_id}}">
+        <h3>{{ poll.name }}</h3>
       </ion-item>
     </ion-list>
   </ion-content>

@@ -20,30 +20,32 @@ angular.module('starter', ['ionic'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
   });
 })
 
-.controller('PollsCtrl', function($scope) {
-  $scope.futurePolls = [
-    { id: 1, title: 'Poll 1' },
-    { id: 2, title: 'Poll 2' },
-    { id: 3, title: 'Poll 3' },
-    { id: 4, title: 'Poll 4' }
-  ];
-  $scope.pastPolls = [
-    { id: 5, title: 'Poll 5' },
-    { id: 6, title: 'Poll 6' },
-    { id: 7, title: 'Poll 7' },
-    { id: 8, title: 'Poll 8' }
-  ];
+.controller('PollsCtrl', function($scope, $http) {
+
+  // Get futurePolls
+  $http.get('http://extensive.ch/vote-api/getfuturepolls').success(function(data) {
+    $scope.futurePolls = data["polls"];
+  });
+
+  $http.get('http://extensive.ch/vote-api/getpastpolls').success(function(data) {
+    $scope.pastPolls = data["polls"];
+  });
+
 })
 
-.controller('PollCtrl', function($scope, $stateParams) {
-  $scope.poll = {
-    id: $stateParams.pollId,
-    title: 'Poll',
-    description: 'Details zur Abstimmung'
-  };
+.controller('PollCtrl', function($scope, $stateParams, $http) {
+
+  $http.get('http://extensive.ch/vote-api/getpoll/'+$stateParams.poll_id).success(function(data) {
+    $scope.poll =  data["polls"][0];
+  });
+
+  $http.get('http://extensive.ch/vote-api/getpollresult/'+$stateParams.poll_id).success(function(data) {
+    console.log(data);
+  });
 
   $scope.vote = 'Yes'
 })
@@ -58,7 +60,7 @@ angular.module('starter', ['ionic'])
   })
 
   .state('poll', {
-    url: '/poll/:pollId',
+    url: '/poll/:poll_id',
     templateUrl: 'templates/poll.html',
     controller: 'PollCtrl'
   })
