@@ -40,7 +40,7 @@ angular.module('starter', ['ionic', 'chart.js'])
   ];
 })
 
-.controller('PollCtrl', function($scope, $stateParams) {
+.controller('PollCtrl', function($scope, $ionicPopup, $timeout, $stateParams) {
 
   $scope.poll = {
     id: $stateParams.pollId,
@@ -55,6 +55,20 @@ angular.module('starter', ['ionic', 'chart.js'])
   }
 
   $scope.vote = 'Yes';  // TODO: set 'Yes', 'No' or '' ('' means not voted yet)
+
+  $scope.updateVoteSuccess = function() {
+
+    var successPopup = $ionicPopup.show({
+      title: '<i class="icon ion-checkmark"></i> Erfolgreich'
+    });
+
+    successPopup.then(function() {});
+
+    $timeout(function() {
+      successPopup.close(); //close the popup after 1 second
+    }, 1500);
+  };
+
 
 })
 
