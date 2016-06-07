@@ -8,17 +8,17 @@
 
     <h3>Anstehende Abstimmungen</h3>
     <ion-list class="polls-list">
-      <ion-item ng-repeat="poll in futurePolls" href="#/poll/{{poll.id}}">
-        <h4>{{ poll.title }}</h4>
+      <ion-item ng-repeat="poll in futurePolls" href="#/poll/{{poll.poll_id}}">
+        <h4>{{ poll.name }}</h4>
       </ion-item>
     </ion-list>
 
     <h3>Vergangene Abstimmungen</h3>
     <ion-list class="polls-list">
-      <ion-item ng-repeat="poll in pastPolls" href="#/poll/{{poll.id}}">
-        <h4>{{ poll.title }}</h4>
+      <ion-item ng-repeat="poll in pastPolls" href="#/poll/{{poll.poll_id}}">
+        <h4>{{ poll.name }}</h4>
       </ion-item>
     </ion-list>
-    
+
   </ion-content>
 </ion-view>

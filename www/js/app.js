@@ -23,38 +23,57 @@ angular.module('starter', ['ionic', 'chart.js'])
   });
 })
 
-.controller('PollsCtrl', function($scope) {
+.controller('PollsCtrl', function($scope, $http) {
 
-  // TODO: load pools
-  $scope.futurePolls = [
-    { id: 1, title: 'Poll 1' },
-    { id: 2, title: 'Poll 2' },
-    { id: 3, title: 'Poll 3' },
-    { id: 4, title: 'Poll 4' }
-  ];
-  $scope.pastPolls = [
-    { id: 5, title: 'Poll 5' },
-    { id: 6, title: 'Poll 6' },
-    { id: 7, title: 'Poll 7' },
-    { id: 8, title: 'Poll 8' }
-  ];
+  // Get futurePolls
+  $http.get('http://extensive.ch/vote-api/getfuturepolls').success(function(data) {
+    $scope.futurePolls = data["polls"];
+  });
+
+  $http.get('http://extensive.ch/vote-api/getpastpolls').success(function(data) {
+    $scope.pastPolls = data["polls"];
+  });
+
 })
 
-.controller('PollCtrl', function($scope, $stateParams) {
+.controller('PollCtrl', function($scope, $stateParams, $http) {
 
-  $scope.poll = {
-    id: $stateParams.pollId,
-    title: 'Poll',        // TODO: load title of poll
-    description: 'Details zur Abstimmung'  // TODO: load text for poll
-  };
+console.log($stateParams);
+  $http.get('http://extensive.ch/vote-api/getpoll/'+$stateParams.pollId).success(function(data) {
+  $scope.poll =  data["polls"][0];
+});
 
-  $scope.pieChart = {
-    labels: ['Ja', 'Nein'],
-    data: [ 58, 42 ],     // TODO: set current results
-    colours: [ '#0071bc', '#add2eb' ]
+$http.get('http://extensive.ch/vote-api/getpollresult/'+$stateParams.pollId).success(function(data) {
+if(data.total > 0) {
+    $scope.pieChart = {
+      labels: ['Ja', 'Nein'],
+      data: [ data.pro, data.contra ],     // TODO: set current results
+      colours: [ '#0071bc', '#add2eb' ]
+    }
   }
+});
+$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+$http.post("http://extensive.ch/vote-api/getvote", {"uuid":"Web-User", "poll_id": $stateParams.pollId})
+.success(function(data, status, headers, config) {
+    console.log(data);
+    $scope.status = data;
 
-  $scope.vote = 'Yes';  // TODO: set 'Yes', 'No' or '' ('' means not voted yet)
+}).error(function(data, status, headers, config) {
+    $scope.status = status;
+});
+
+$scope.setvote = function() {
+  if($scope.status == "no result"){
+    $scope.vote = '';
+  }
+  else if($scope.status == "0"){
+    $scope.vote = 'No';
+  }
+  else if($scope.status == "1"){
+    $scope.vote = 'Yes';
+  }
+}
+
 
 })
 
@@ -74,6 +93,5 @@ angular.module('starter', ['ionic', 'chart.js'])
   })
 
   $urlRouterProvider.otherwise('/polls');
-
 
 })
