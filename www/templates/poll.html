@@ -9,8 +9,8 @@
 
     <h3>Deine Stimme</h3>
     <div class="vote-buttons">
-      <ion-radio ng-model="vote" ng-value="'Yes'">Ja</ion-radio>
-      <ion-radio ng-model="vote" ng-value="'No'">Nein</ion-radio>
+      <ion-radio ng-model="vote" ng-value="'Yes'" ng-click="setVote('1')">Ja</ion-radio>
+      <ion-radio ng-model="vote" ng-value="'No'" ng-click="setVote('0')">Nein</ion-radio>
     </div>
 
     <h3>Worum geht's</h3>
@@ -20,6 +20,7 @@
 
     <h3>Resultate</h3>
     <div class="poll-diagram">
+    <strong>Anzahl Stimmen: {{poll.totalvotes}}</strong>
       <canvas id="pie" class="chart chart-pie" chart-data="pieChart.data" chart-labels="pieChart.labels" chart-legend="true" chart-colours="pieChart.colours">
       </canvas>
     </div>

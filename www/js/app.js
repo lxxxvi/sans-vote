@@ -37,44 +37,64 @@ angular.module('starter', ['ionic', 'chart.js'])
 })
 
 .controller('PollCtrl', function($scope, $stateParams, $http) {
+  $scope.getPoll = function(id) {
+    console.log("getpoll called");
+    $http.get('http://extensive.ch/vote-api/getpoll/'+id).success(function(data) {
+        $scope.poll =  data["polls"][0];
+    });
 
-console.log($stateParams);
-  $http.get('http://extensive.ch/vote-api/getpoll/'+$stateParams.pollId).success(function(data) {
-  $scope.poll =  data["polls"][0];
-});
+    $http.get('http://extensive.ch/vote-api/getpollresult/'+id).success(function(data) {
+      console.log("getpoll result");
+      console.log(data);
 
-$http.get('http://extensive.ch/vote-api/getpollresult/'+$stateParams.pollId).success(function(data) {
-if(data.total > 0) {
-    $scope.pieChart = {
-      labels: ['Ja', 'Nein'],
-      data: [ data.pro, data.contra ],     // TODO: set current results
-      colours: [ '#0071bc', '#add2eb' ]
+          if(data.total > 0) {
+              $scope.poll.totalvotes = data.total;
+              $scope.pieChart = {
+                labels: ['Ja', 'Nein'],
+                data: [ data.pro, data.contra ],     // TODO: set current results
+                colours: [ '#0071bc', '#add2eb' ]
+              }
+          }
+          else {
+            $scope.poll.totalvotes = 0;
+          }
+          $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+          $http.post("http://extensive.ch/vote-api/getvote", {"uuid":"Web-User", "poll_id": id})
+          .success(function(data, status, headers, config) {
+              console.log(data);
+              console.log("gotvote");
+              $scope.getVote(data.votetype);
+          }).error(function(data, status, headers, config) {
+              $scope.status = status;
+          });
+    });
+  }
+
+  $scope.getVote = function(vote) {
+    if(vote == "0"){
+      $scope.vote = 'No';
+    }
+    else if(vote == "1"){
+      $scope.vote = 'Yes';
+    }
+    else {
+        $scope.vote = '';
     }
   }
-});
-$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-$http.post("http://extensive.ch/vote-api/getvote", {"uuid":"Web-User", "poll_id": $stateParams.pollId})
-.success(function(data, status, headers, config) {
-    console.log(data);
-    $scope.status = data;
 
-}).error(function(data, status, headers, config) {
-    $scope.status = status;
-});
-
-$scope.setvote = function() {
-  if($scope.status == "no result"){
-    $scope.vote = '';
+  $scope.setVote = function(value) {
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    $http.post("http://extensive.ch/vote-api/setvote", {"uuid":"Web-User", "poll_id": $scope.poll.poll_id, "vote_type": value})
+    .success(function(data, status, headers, config) {
+        console.log(data);
+        $scope.getPoll($scope.poll.poll_id);
+    }).error(function(data, status, headers, config) {
+        $scope.status = status;
+        console.log(status);
+    });
   }
-  else if($scope.status == "0"){
-    $scope.vote = 'No';
-  }
-  else if($scope.status == "1"){
-    $scope.vote = 'Yes';
-  }
-}
 
-
+  $scope.getPoll($stateParams.pollId);
 })
 
 .config(function($stateProvider, $urlRouterProvider,  $ionicConfigProvider) {
